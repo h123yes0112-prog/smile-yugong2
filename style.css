@@ -1,0 +1,1327 @@
+/* Custom Stylesheet for 《愚公移山》 售票網頁 - Mr.YES Playful Circus Theme */
+
+/* 1. CSS Design Variables (Inspired by Mr.YES Theatre brand style) */
+:root {
+    --bg-color: #FAF1E6;          /* Cream/Beige Background */
+    --bg-color-alt: #F0E2D0;      /* Darker cream for alternating sections */
+    --card-bg: #FFFFFF;           /* White for cards */
+    --card-border: #4A3F35;       /* Dark Brown border color */
+    
+    --text-primary: #4A3F35;      /* Dark Brown for text */
+    --text-secondary: #6B5E53;    /* Medium Brown secondary text */
+    --text-muted: #9E8F82;        /* Light Brown muted text */
+    --white: #FFFFFF;
+    
+    --primary: #E85D5D;           /* Circus Red */
+    --primary-hover: #D04545;     /* Darker Red */
+    --secondary: #F4C430;         /* Sunny Yellow */
+    
+    --accent: #FF6B35;            /* Circus Orange */
+    --accent-green: #76C2AF;      /* Mint Green */
+    --accent-blue: #5C9CE6;       /* Sky Blue */
+    
+    --border-radius-sm: 15px;
+    --border-radius-md: 25px;
+    --border-radius-lg: 40px;
+    
+    --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --font-heading: 'Outfit', 'Noto Sans TC', sans-serif;
+    --font-body: 'Noto Sans TC', sans-serif;
+
+    /* Shadows - Soft, Sticker-like Solid Shadow */
+    --shadow-glass: 0 4px 15px rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 10px 30px rgba(74, 63, 53, 0.05);
+    --shadow-solid: 5px 5px 0px rgba(74, 63, 53, 0.15);
+    --shadow-solid-hover: 7px 7px 0px rgba(74, 63, 53, 0.2);
+}
+
+/* 2. Global Reset & Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+}
+
+body {
+    overflow-x: hidden;
+    position: relative;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    color: var(--text-primary);
+    margin-bottom: 0.5em;
+}
+
+p {
+    color: var(--text-secondary);
+    margin-bottom: 1em;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    font-weight: 700;
+}
+
+a:hover {
+    color: var(--primary-hover);
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-color-alt);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: 5px;
+    border: 2px solid var(--bg-color-alt);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* 3. Playful Decorative Background shapes */
+.bg-glow {
+    display: none; /* Disable dark glows */
+}
+
+/* Add custom circus shapes/stickers background style if needed */
+body::before {
+    content: '';
+    position: absolute;
+    top: 15%;
+    right: 5%;
+    width: 80px;
+    height: 80px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23F4C430"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: -1;
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    top: 55%;
+    left: 3%;
+    width: 100px;
+    height: 100px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%235C9CE6"><circle cx="12" cy="12" r="10"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 4. Sticker Card Style */
+.glass-card {
+    background: var(--card-bg);
+    border: 3px solid var(--card-border);
+    border-radius: var(--border-radius-md);
+    padding: 2.2rem;
+    box-shadow: var(--shadow-solid);
+    transition: var(--transition-smooth);
+}
+
+.glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-solid-hover);
+    background: var(--card-bg);
+}
+
+/* 5. Navigation Bar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(250, 241, 230, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 15px 0;
+    border-bottom: 3px dashed var(--secondary);
+    box-shadow: var(--shadow-glass);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--primary);
+    font-family: var(--font-heading);
+}
+
+.brand-logo i {
+    color: var(--secondary);
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    position: relative;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--secondary);
+    transition: var(--transition-smooth);
+    border-radius: 2px;
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+.nav-cta-btn {
+    background: var(--primary);
+    color: var(--white) !important;
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    border: 2px solid var(--card-border);
+    box-shadow: 3px 3px 0px var(--card-border);
+}
+
+.nav-cta-btn::after {
+    display: none !important;
+}
+
+.nav-cta-btn:hover {
+    transform: translateY(-2px);
+    background: var(--primary-hover);
+    box-shadow: 4px 4px 0px var(--card-border);
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+    .nav-container {
+        justify-content: center;
+    }
+}
+
+/* 6. Hero Section */
+.hero-section {
+    padding: 8rem 1.5rem 5rem 1.5rem;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--bg-color);
+}
+
+.hero-container {
+    max-width: 850px;
+    width: 100%;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: var(--primary);
+    border: 3px solid var(--card-border);
+    padding: 0.5rem 1.4rem;
+    border-radius: 50px;
+    margin-bottom: 1.8rem;
+    box-shadow: 3px 3px 0px rgba(74, 63, 53, 0.15);
+}
+
+.badge-text {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hero-title {
+    font-size: 3.2rem;
+    line-height: 1.25;
+    margin-bottom: 1.8rem;
+    font-weight: 900;
+    color: var(--text-primary);
+}
+
+.text-gradient {
+    color: var(--primary);
+    border-bottom: 4px dashed var(--secondary);
+    padding-bottom: 2px;
+}
+
+.hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.text-accent {
+    color: var(--primary);
+}
+
+/* Poster Card */
+.poster-container {
+    position: relative;
+    max-width: 520px;
+    margin: 0 auto 3.5rem auto;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-solid);
+    border: 6px solid var(--white);
+    transform: scale(0.98);
+    transition: var(--transition-smooth);
+}
+
+.poster-container:hover {
+    transform: scale(1.0);
+    box-shadow: var(--shadow-solid-hover);
+}
+
+.slideshow-wrapper {
+    display: grid;
+    width: 100%;
+}
+
+.poster-img {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.poster-img.active {
+    opacity: 1;
+}
+
+.poster-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(250, 241, 230, 0.9) 0%, rgba(250, 241, 230, 0) 100%);
+    display: flex;
+    justify-content: center;
+}
+
+.overlay-tag {
+    background: var(--secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--card-border);
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    box-shadow: 3px 3px 0px rgba(74, 63, 53, 0.15);
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* 7. Buttons - solid flat styling */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    font-family: var(--font-heading);
+    font-weight: 900;
+    text-align: center;
+    border: 3px solid var(--card-border);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    white-space: nowrap;
+    box-shadow: var(--shadow-solid);
+}
+
+.btn-lg {
+    padding: 1rem 2.2rem;
+    font-size: 1.15rem;
+}
+
+.btn-md {
+    padding: 0.75rem 1.7rem;
+    font-size: 1.05rem;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-solid-hover);
+    background: var(--primary-hover);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 3px 3px 0px rgba(74, 63, 53, 0.15);
+}
+
+.btn-primary:disabled {
+    background: var(--bg-color-alt);
+    color: var(--text-muted);
+    border-color: var(--text-muted);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: var(--white);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--bg-color-alt);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-solid-hover);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.pulse-effect::after {
+    display: none; /* Disable dark neon pulse */
+}
+
+/* 8. Sections Layout */
+section {
+    padding: 6rem 1.5rem;
+}
+
+.section-padding-alt {
+    background-color: var(--bg-color-alt);
+}
+
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4rem auto;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 0.8rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 6px;
+    background: var(--secondary);
+    bottom: -8px;
+    left: 20%;
+    border-radius: 3px;
+}
+
+.section-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+}
+
+/* 9. Battle VS Section (微笑姊姊 vs 葉爸爸) */
+.about-section {
+    background: var(--bg-color-alt);
+}
+
+.battle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+}
+
+.battle-card {
+    flex: 1;
+    background: var(--white);
+    border: 3px solid var(--card-border);
+    border-radius: var(--border-radius-md);
+    padding: 2.8rem 2.2rem;
+    text-align: center;
+    box-shadow: var(--shadow-solid);
+    transition: var(--transition-smooth);
+}
+
+.side-left {
+    border-left: 8px solid var(--accent-blue);
+}
+
+.side-right {
+    border-right: 8px solid var(--primary);
+}
+
+.battle-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-solid-hover);
+}
+
+.avatar-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 400px;
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    border: 3px solid var(--card-border);
+    box-shadow: 2px 2px 0px var(--card-border);
+}
+
+.side-left .avatar-wrapper {
+    background: var(--accent-blue);
+    color: var(--white);
+}
+
+.side-right .avatar-wrapper {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.avatar-icon {
+    font-size: 2.2rem;
+}
+
+.battle-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.4rem;
+}
+
+.role-desc {
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+}
+
+.side-left .role-desc {
+    color: var(--accent-blue);
+}
+
+.side-right .role-desc {
+    color: var(--primary);
+}
+
+.character-detail {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.battle-vs {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--white);
+    width: 70px;
+    height: 70px;
+    background: var(--secondary);
+    border: 4px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 4px 4px 0px var(--card-border);
+    flex-shrink: 0;
+    transform: rotate(-10deg);
+}
+
+/* Story description box */
+.story-box {
+    max-width: 950px;
+    margin: 0 auto;
+    border: 4px dashed var(--accent-green);
+    background: var(--white);
+}
+
+.story-box h3 {
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.story-box p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.highlight-quote {
+    background: rgba(244, 196, 48, 0.12);
+    border: 2px dashed var(--secondary);
+    padding: 1.2rem 1.8rem;
+    margin: 2rem 0;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-align: center;
+    border-radius: var(--border-radius-sm);
+}
+
+@media (max-width: 768px) {
+    .battle-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .battle-vs {
+        margin: -0.8rem 0;
+        transform: rotate(0deg);
+    }
+    .battle-card {
+        width: 100%;
+    }
+}
+
+/* 10. Info Section & Grid */
+.info-section {
+    background: var(--bg-color);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.info-card {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    border: 3px solid var(--card-border);
+    background: var(--white);
+}
+
+.card-icon {
+    font-size: 2.8rem;
+    color: var(--primary);
+    margin-bottom: 1.2rem;
+}
+
+.info-card h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+    color: var(--text-primary);
+}
+
+.info-card p {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+}
+
+.sub-text {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+    font-weight: 400;
+}
+
+/* Map Card */
+.map-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 3px solid var(--card-border);
+    border-left: 10px solid var(--secondary);
+    background: var(--white);
+}
+
+.map-info h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+}
+
+.venue-name {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+}
+
+.venue-address {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.2rem;
+}
+
+.venue-tips {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    background: rgba(118, 194, 175, 0.1);
+    border: 2px dashed var(--accent-green);
+    padding: 0.8rem 1.2rem;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 1.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+}
+
+/* 11. Workflow/Booking Steps */
+.workflow-section {
+    background: var(--bg-color-alt);
+}
+
+.workflow-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.step-item {
+    text-align: center;
+    z-index: 2;
+    background: var(--white);
+    border: 3px solid var(--card-border);
+    border-radius: var(--border-radius-md);
+    padding: 2.5rem 1.8rem;
+    box-shadow: var(--shadow-solid);
+}
+
+.step-num {
+    width: 60px;
+    height: 60px;
+    background: var(--secondary);
+    color: var(--text-primary);
+    border: 3px solid var(--card-border);
+    border-radius: 50%;
+    font-size: 1.6rem;
+    font-weight: 900;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    box-shadow: 3px 3px 0px var(--card-border);
+}
+
+.step-content h4 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+    font-weight: 900;
+}
+
+.step-content p {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.workflow-steps::after {
+    display: none; /* Disable neon connector line */
+}
+
+.bank-details-box {
+    margin-top: 1.2rem;
+    background: var(--bg-color);
+    border: 2px dashed var(--card-border);
+    border-radius: var(--border-radius-sm);
+    padding: 1rem 1.2rem;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.bank-details-box p {
+    margin-bottom: 0.4rem;
+    color: var(--text-secondary);
+}
+
+.bank-details-box span {
+    color: var(--primary);
+    font-family: 'Outfit', monospace;
+    font-weight: 800;
+}
+
+@media (max-width: 768px) {
+    .workflow-steps {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .step-item {
+        display: flex;
+        align-items: flex-start;
+        text-align: left;
+        gap: 1.2rem;
+        padding: 2rem 1.5rem;
+    }
+    .step-num {
+        margin-bottom: 0;
+        flex-shrink: 0;
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    .step-content {
+        flex-grow: 1;
+    }
+}
+
+/* 12. Tickets & Calculator */
+.tickets-section {
+    background: var(--bg-color);
+}
+
+.session-selector {
+    max-width: 600px;
+    margin: 0 auto 3.5rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.session-label {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.session-dropdown {
+    width: 100%;
+    padding: 1.1rem 1.4rem;
+    background: var(--white);
+    border: 3px solid var(--card-border);
+    border-radius: var(--border-radius-md);
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    outline: none;
+    box-shadow: var(--shadow-solid);
+}
+
+.session-dropdown:focus {
+    background: var(--white);
+    border-color: var(--primary);
+    box-shadow: var(--shadow-solid-hover);
+}
+
+.session-dropdown option {
+    background: var(--white);
+    color: var(--text-primary);
+    padding: 12px;
+}
+
+/* Tickets Grid */
+.tickets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.ticket-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    border: 3px solid var(--card-border);
+    border-top: 8px solid var(--card-border);
+    box-shadow: var(--shadow-solid);
+    background: var(--white);
+}
+
+.ticket-card:hover {
+    transform: translateY(-6px);
+    border-top-color: var(--primary);
+    box-shadow: var(--shadow-solid-hover);
+}
+
+.ticket-badge {
+    position: absolute;
+    top: -16px;
+    right: 20px;
+    background: var(--accent-green);
+    color: var(--white);
+    border: 2px solid var(--card-border);
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 900;
+    box-shadow: 2px 2px 0px var(--card-border);
+}
+
+.ticket-header {
+    margin-bottom: 1.8rem;
+}
+
+.ticket-header h3 {
+    font-size: 1.35rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.35;
+    color: var(--text-primary);
+}
+
+.ticket-price {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--primary);
+    font-family: var(--font-heading);
+}
+
+.ticket-features {
+    margin-bottom: 2rem;
+    border-top: 2px dashed var(--bg-color-alt);
+    padding-top: 1rem;
+}
+
+.ticket-features ul {
+    list-style: none;
+}
+
+.ticket-features li {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 700;
+}
+
+.ticket-features i {
+    color: var(--accent-green);
+    font-size: 0.9rem;
+}
+
+/* Qty Buttons UI */
+.ticket-qty-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-color);
+    border: 2px solid var(--card-border);
+    border-radius: 50px;
+    padding: 0.5rem 0.6rem;
+}
+
+.qty-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--card-border);
+    background: var(--white);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    font-size: 1rem;
+    box-shadow: 2px 2px 0px var(--card-border);
+}
+
+.qty-btn:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+}
+
+.qty-btn:active {
+    transform: translateY(0);
+    box-shadow: 1px 1px 0px var(--card-border);
+}
+
+.qty-val {
+    font-size: 1.35rem;
+    font-weight: 900;
+    width: 35px;
+    text-align: center;
+    font-family: var(--font-heading);
+}
+
+/* Calculator Box */
+.calculator-box {
+    max-width: 700px;
+    margin: 0 auto;
+    border: 3px solid var(--card-border);
+    border-left: 10px solid var(--primary);
+    background: var(--white);
+    box-shadow: var(--shadow-solid);
+}
+
+.calc-header h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.calc-body {
+    background: var(--bg-color);
+    border: 2px dashed var(--card-border);
+    border-radius: var(--border-radius-sm);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.calc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.calc-divider {
+    border: 0;
+    height: 2px;
+    background: var(--card-border);
+    margin: 1.2rem 0;
+}
+
+.total-row {
+    font-weight: 900;
+    font-size: 1.25rem;
+}
+
+.total-price {
+    font-size: 2rem;
+    color: var(--primary);
+    font-weight: 900;
+    font-family: var(--font-heading);
+}
+
+.calc-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.8rem;
+    padding-left: 1.2rem;
+    border-left: 3px solid var(--secondary);
+}
+
+.breakdown-item {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+}
+
+.calc-action {
+    text-align: center;
+}
+
+.action-note {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-weight: 700;
+}
+
+/* 13. Terms & Notices Grid */
+.notices-section {
+    background: var(--bg-color-alt);
+    border-top: 3px dashed var(--card-border);
+}
+
+.notices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2.5rem;
+}
+
+.notice-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: var(--white);
+    border: 3px solid var(--card-border);
+    border-radius: var(--border-radius-sm);
+    padding: 1.8rem;
+    box-shadow: var(--shadow-solid);
+}
+
+.notice-icon {
+    font-size: 1.8rem;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+    background: var(--bg-color);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid var(--card-border);
+}
+
+.notice-item h5 {
+    font-size: 1.15rem;
+    margin-bottom: 0.6rem;
+    font-weight: 900;
+}
+
+.notice-item p {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+/* 14. Footer */
+.footer {
+    background: var(--card-border);
+    color: var(--bg-color);
+    padding: 5rem 1.5rem 7rem 1.5rem; /* Add extra padding bottom for mobile sticky bar */
+    border-top: 5px solid var(--secondary);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+
+.footer-brand h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary);
+}
+
+.footer-brand p {
+    font-size: 0.95rem;
+    color: var(--bg-color);
+    opacity: 0.8;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.footer-links h4 {
+    font-size: 1.05rem;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 4px;
+}
+
+.footer-links a {
+    font-size: 0.95rem;
+    color: var(--bg-color);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    opacity: 0.8;
+}
+
+.footer-links a:hover {
+    color: var(--secondary);
+    opacity: 1;
+}
+
+.footer-bottom {
+    width: 100%;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px dashed rgba(250, 241, 230, 0.2);
+    text-align: center;
+    font-size: 0.88rem;
+    color: var(--bg-color);
+    opacity: 0.6;
+}
+
+/* 15. Mobile Sticky Buy Bar */
+.mobile-sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--white);
+    border-top: 3px solid var(--card-border);
+    padding: 0.9rem 1.5rem;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 999;
+    box-shadow: 0 -5px 20px rgba(74, 63, 53, 0.1);
+}
+
+.sticky-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.sticky-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 700;
+}
+
+.sticky-price {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--primary);
+    font-family: var(--font-heading);
+}
+
+.sticky-btn {
+    background: var(--primary);
+    color: var(--white);
+    padding: 0.8rem 1.6rem;
+    border-radius: 50px;
+    font-weight: 900;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 3px solid var(--card-border);
+    box-shadow: 3px 3px 0px var(--card-border);
+    font-family: var(--font-heading);
+}
+
+.sticky-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0px var(--card-border);
+}
+
+.sticky-btn:active {
+    transform: translateY(0);
+    box-shadow: 2px 2px 0px var(--card-border);
+}
+
+@media (max-width: 991px) {
+    .mobile-sticky-bar {
+        display: flex;
+    }
+}
+
+/* 16. Video Showcase Card & Responsive Container */
+.video-wrapper-card {
+    max-width: 950px;
+    margin: 3rem auto 0 auto;
+    border: 3px solid var(--card-border);
+    background: var(--white);
+    text-align: center;
+}
+
+.video-wrapper-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+    font-weight: 900;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--border-radius-sm);
+    border: 3px solid var(--card-border);
+    box-shadow: var(--shadow-solid);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
