@@ -19,8 +19,8 @@ const GOOGLE_FORM_ENTRIES = {
 let bookingState = {
     selectedSession: "",
     sessionInventory: {
-        "10/18 11:30": 62,    // ← 請手動修改為剩餘席次數
-        "10/18 14:00": 60     // ← 請手動修改為剩餘席次數
+        "10/18 11:30": 26,    // ← 請手動修改為剩餘席次數
+        "10/18 14:00": 58     // ← 請手動修改為剩餘席次數
     },
     tickets: {
         "微笑姐姐新頻道專屬優惠": { price: 370, qty: 0 },
