@@ -19,8 +19,8 @@ const GOOGLE_FORM_ENTRIES = {
 let bookingState = {
     selectedSession: "",
     sessionInventory: {
-        "10/18 11:30": 26,    // ← 請手動修改為剩餘席次數
-        "10/18 14:00": 58     // ← 請手動修改為剩餘席次數
+        "10/18 11:30": 0,     // 上午場 完售
+        "10/18 14:00": 47     // 下午場 剩餘 47
     },
     tickets: {
         "中秋節雙人優惠": { price: 800, qty: 0 },
@@ -43,6 +43,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const stickyBtnText = document.getElementById("sticky-btn-text");
     const stickyActionBtn = document.getElementById("sticky-action-btn");
     const btnSubmitBooking = document.getElementById("btn-submit-booking");
+
+    // 初始化場次下拉選單顯示（完售場次自動標註）
+    if (sessionSelect) {
+        Array.from(sessionSelect.options).forEach(opt => {
+            if (bookingState.sessionInventory[opt.value] !== undefined) {
+                if (bookingState.sessionInventory[opt.value] <= 0 && !opt.text.includes("已完售")) {
+                    opt.text += "（已完售）";
+                }
+            }
+        });
+    }
 
     // ==========================================
     // 3.5 幻燈片輪播邏輯 (Hero Slideshow)
@@ -106,7 +117,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 calculateTotals();
                 updateUI();
             } else if (currentRemaining < seatsPerTicket) {
-                alert("本場次剩餘席次不足！");
+                if (bookingState.sessionInventory[bookingState.selectedSession] <= 0) {
+                    alert("很抱歉，本場次票券已全數售罄！");
+                } else {
+                    alert("本場次剩餘席次不足！");
+                }
             }
         });
     });
@@ -150,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateUI() {
         const inventoryStatus = document.getElementById("inventory-status");
-        const remainingTicketsDisp = document.getElementById("remaining-tickets");
 
         if (bookingState.selectedSession) {
             calcSessionDisp.textContent = bookingState.selectedSession;
@@ -158,7 +172,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             inventoryStatus.style.display = "block";
             const remaining = bookingState.sessionInventory[bookingState.selectedSession] - (bookingState.totalSeats || 0);
-            remainingTicketsDisp.textContent = remaining;
+            if (remaining <= 0) {
+                inventoryStatus.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> 本場次票券已全數售罄（已完售）`;
+                inventoryStatus.style.color = "#e53e3e";
+            } else {
+                inventoryStatus.innerHTML = `<i class="fa-solid fa-fire-flame-curved"></i> 本場次剩餘席次：<span id="remaining-tickets">${remaining}</span> 張`;
+                inventoryStatus.style.color = "var(--primary)";
+            }
         } else {
             calcSessionDisp.textContent = "尚未選擇";
             inventoryStatus.style.display = "none";
@@ -201,13 +221,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!bookingState.selectedSession && bookingState.totalQuantity > 0) {
                 btnSubmitBooking.textContent = "請選擇演出場次";
+                stickyBtnText.textContent = "選擇票券";
             } else if (bookingState.selectedSession && bookingState.totalQuantity === 0) {
-                btnSubmitBooking.textContent = "請至少選擇一張票券";
+                if (bookingState.sessionInventory[bookingState.selectedSession] <= 0) {
+                    btnSubmitBooking.textContent = "本場次已完售，請選擇其他場次";
+                    stickyBtnText.textContent = "本場次已完售";
+                } else {
+                    btnSubmitBooking.textContent = "請至少選擇一張票券";
+                    stickyBtnText.textContent = "選擇票券";
+                }
             } else {
                 btnSubmitBooking.textContent = "請先選擇場次與票券數量";
+                stickyBtnText.textContent = "選擇票券";
             }
 
-            stickyBtnText.textContent = "選擇票券";
             stickyActionBtn.style.background = "var(--primary)";
         }
     }
