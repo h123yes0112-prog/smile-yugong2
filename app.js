@@ -23,8 +23,8 @@ let bookingState = {
         "10/18 14:00": 47     // 下午場 剩餘 47
     },
     tickets: {
-        "中秋節雙人優惠": { price: 800, qty: 0 },
-        "一般票券": { price: 450, qty: 0 }
+        "雙十連假限時優惠": { price: 1300, seats: 3, qty: 0 },
+        "一般票券": { price: 450, seats: 1, qty: 0 }
     },
     totalQuantity: 0,
     totalPrice: 0
@@ -108,7 +108,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            let seatsPerTicket = (ticketName.includes("雙人") || ticketName.includes("親子")) ? 2 : 1;
+            let seatsPerTicket = bookingState.tickets[ticketName]?.seats || 
+                (ticketName.includes("3人") || ticketName.includes("三人") || ticketName.includes("雙十") ? 3 : 
+                ((ticketName.includes("雙人") || ticketName.includes("親子")) ? 2 : 1));
             let currentRemaining = bookingState.sessionInventory[bookingState.selectedSession] - (bookingState.totalSeats || 0);
 
             if (bookingState.tickets[ticketName].qty < 10 && currentRemaining >= seatsPerTicket) {
@@ -154,7 +156,9 @@ document.addEventListener("DOMContentLoaded", () => {
             totalQty += ticket.qty;
             totalPrice += ticket.qty * ticket.price;
 
-            let seatsPerTicket = (key.includes("雙人") || key.includes("親子")) ? 2 : 1;
+            let seatsPerTicket = ticket.seats || 
+                (key.includes("3人") || key.includes("三人") || key.includes("雙十") ? 3 : 
+                ((key.includes("雙人") || key.includes("親子")) ? 2 : 1));
             totalSeats += ticket.qty * seatsPerTicket;
         }
 
