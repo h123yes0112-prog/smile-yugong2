@@ -20,7 +20,7 @@ let bookingState = {
     selectedSession: "",
     sessionInventory: {
         "10/18 11:30": 0,     // 上午場 完售
-        "10/18 14:00": 47     // 下午場 剩餘 47
+        "10/18 14:00": 36     // 下午場 剩餘 36
     },
     tickets: {
         "雙十連假限時優惠": { price: 1300, seats: 3, qty: 0 },
